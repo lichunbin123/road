@@ -1,8 +1,12 @@
 package com.example.crud.controller;
 
 import com.example.crud.bean.ApplicationUser;
+import com.example.crud.service.DataService;
 import com.example.crud.service.UserService;
 import com.example.crud.utils.ResponseMessage;
+import io.goeasy.GoEasy;
+import io.goeasy.publish.GoEasyError;
+import io.goeasy.publish.PublishListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,18 +14,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
 /**
  * @author: lcb
  * @Date: 2019  6/17/19  9:11 PM
  */
 @Controller
-public class UserManager {
+public class UserController {
 
     private UserService userService;
 
     @Autowired
-    public UserManager(UserService userService){
+    public UserController(UserService userService){
         this.userService = userService;
     }
     @RequestMapping("/application")
@@ -30,6 +33,25 @@ public class UserManager {
         System.out.println("had enter application page");
     }
 
+//    @RequestMapping("/monitoring")
+//    @ResponseBody
+//    public void EnterMonitoring(){
+//        System.out.println("进入监控模块");
+//        //        dataService.producer();
+////        dataService.consumer();
+////        dataService.publishMessage();
+////        GoEasy goEasy = new GoEasy("rest-hangzhou.goeasy.io","BC-1fd590eb9aef46a6809486626b4199a2");
+////        goEasy.publish("trafficFlow","第一个goeasy",new PublishListener(){
+////            @Override
+////            public void onSuccess() {
+////                System.out.print("消息发布成功 ");
+////            }
+////            @Override
+////            public void onFailed(GoEasyError error) {
+////                System.out.print("消息发布失败 ,  错误编码：" + error.getCode());
+////            }
+////        });
+//    }
     @RequestMapping("/getUserMessage")
     @ResponseBody
     public ResponseEntity<ResponseMessage> getUserMessage(){
@@ -50,12 +72,12 @@ public class UserManager {
         ResponseMessage responseMessage = userService.deleteUserMessage(id);
         return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
     }
-    @RequestMapping("/updateUserMessage/{id}")
+    @RequestMapping("/updateUserMessage")
     @ResponseBody
-    public ResponseEntity<ResponseMessage> updateUserMessage(@RequestBody ApplicationUser user,@PathVariable int id){
-//        ResponseMessage responseMessage = userService.updateUserMessage(user);
-//        return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
-        return null;
+    public ResponseEntity<ResponseMessage> updateUserMessage(@RequestBody ApplicationUser user){
+
+        ResponseMessage responseMessage = userService.updateUserMessage(user);
+        return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
     }
     @RequestMapping("/getBlogById/{id}")
     @ResponseBody

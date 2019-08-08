@@ -8,6 +8,10 @@ import java.util.List;
 
 @Component
 public interface UserMapper {
-    void insert(ApplicationUser user) throws DataAccessException;
     List<ApplicationUser> findByName(String username) throws DataAccessException;
+    List<ApplicationUser> findAll() throws DataAccessException;
+    void insertUserMessage(ApplicationUser user);
+    void deleteUserMessage(int id);
+    void updateUserMessage(String password,String role,String username);
+    List<ApplicationUser> findById(int id);
 }

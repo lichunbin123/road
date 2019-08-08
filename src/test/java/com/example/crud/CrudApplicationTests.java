@@ -1,7 +1,7 @@
 package com.example.crud;
 
-import com.example.crud.bean.Crud;
-import com.example.crud.dao.CrudDao;
+import com.example.crud.bean.ApplicationUser;
+import com.example.crud.dao.UserDao;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +16,7 @@ import java.util.List;
 @SpringBootTest
 public class CrudApplicationTests {
     @Autowired
-    CrudDao crudDao;
+    UserDao userDao;
     @Autowired
     StringRedisTemplate stringRedisTemplate;
 //    @Autowired
@@ -31,19 +31,16 @@ public class CrudApplicationTests {
         String msg = stringRedisTemplate.opsForValue().get("msg");
         System.out.println("msg====="+msg);
     }
-    @Test
-    public void test01(){
-        List<Crud> crudList = crudDao.findAll();
-        //默认保存对象采用的是jdk序列化机制，序列化之后的数据保存在redis中
-//        redisTemplate.opsForValue().set("crud",crudList);
-        //将数据以json的形式保存
-        redisTemplate.opsForValue().set("crud",crudList);
-        List<Crud> list = (List<Crud>) redisTemplate.opsForValue().get("crud");
-        System.out.println("list===="+list.toString());
-    }
+
     @Test
     public void contextLoads() {
 
+    }
+
+    @Test
+    public void test02(){
+        List<ApplicationUser> list = userDao.findAll();
+        System.out.println(list.get(0));
     }
 
 }

@@ -4,7 +4,10 @@ import com.example.crud.bean.ApplicationUser;
 import com.example.crud.utils.ResponseMessage;
 
 public interface UserService {
-    ResponseMessage insert(ApplicationUser user);
-    ResponseMessage verify(ApplicationUser loginUser);
+    ResponseMessage findAllMessage();
     ResponseMessage error();
+    ResponseMessage insertUserMessage(ApplicationUser user);
+    ResponseMessage deleteUserMessage(int id);
+    ResponseMessage updateUserMessage(ApplicationUser user);
+    ResponseMessage findById(int id);
 }

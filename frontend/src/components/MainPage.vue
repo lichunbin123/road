@@ -2,8 +2,8 @@
   <div id="main">
      <el-form ref="mainForm"  class="main-container">
       <el-row>
-        <el-button type="primary" @click="application" round>平台应用管理</el-button>
-        <el-button type="primary" @click="monitoring" round>路网运行监测管理</el-button>
+        <el-button type="primary" @click="application()" round >平台应用管理</el-button>
+        <el-button type="primary" @click="monitoring()" round>路网运行监测管理</el-button>
         <el-button type="primary" @click="disposal" round>应急管理与处置</el-button>
         <el-button type="primary" @click="publish" round>公路出行信息发布</el-button>
       </el-row>
@@ -11,8 +11,31 @@
   </div>
 </template>
 <script>
+  import axios from 'axios'
     export default {
-        name: "Main"
+      name: "Main",
+      methods:{
+        application: function () {
+          const url = `http://localhost:8083/application`
+          return axios.post(url).then(res => {
+            console.log(res.status)
+            this.$router.push("/application")
+          }).catch(err => {
+            console.log(err.response)
+            this.$message("帐号没有权限")
+          })
+        },
+        monitoring: function () {
+          const url = `http://localhost:8083/monitoring`
+          return axios.post(url).then(res => {
+            console.log(res.status)
+            this.$router.push("/monitoring")
+          }).catch(err => {
+            console.log(err.response)
+            this.$message("帐号没有权限")
+          })
+        }
+      }
     }
 </script>
 

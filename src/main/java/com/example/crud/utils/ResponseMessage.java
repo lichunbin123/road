@@ -1,6 +1,7 @@
 package com.example.crud.utils;
 
 
+import com.example.crud.bean.ApplicationUser;
 import lombok.*;
 import org.springframework.http.HttpStatus;
 
@@ -36,4 +37,8 @@ public class ResponseMessage<T> {
      */
     private List<T> responseData;
 
+    /**
+     * 返回一个用户数据
+     */
+    private ApplicationUser responseUser;
 }

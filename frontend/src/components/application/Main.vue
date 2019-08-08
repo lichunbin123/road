@@ -3,7 +3,7 @@
     <div class="header">
       <i class="el-icon-s-tools"></i>
       <h>平台应用管理</h>
-      <el-link :underline="false" style="float: right; margin-right: 30px; font-size: 20px">系统首页</el-link>
+      <el-link :underline="false" style="float: right; margin-right: 30px; font-size: 20px"><router-link to="/main">系统首页</router-link></el-link>
     </div>
     <div class="medium">
       <div class="menu" style="float: left; width: 15%">
@@ -70,7 +70,7 @@
     data () {
       return {
         flag: false,
-        cls: false
+        cls: false,
       }
     },
     methods: {
@@ -83,6 +83,7 @@
       click() {
         this.flag = true;
         this.cls = false
+        console.log("click is useful")
       },
       clsclick() {
         this.cls = true;

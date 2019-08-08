@@ -2,6 +2,8 @@ package com.example.crud.bean;
 import lombok.*;
 
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 @Getter
 @Setter
@@ -12,5 +14,7 @@ import java.io.Serializable;
 public class ApplicationUser implements Serializable {
     private int id;
     private String username;
-    private String userpassword;
+    private String password;
+    private String role;
+    private Timestamp time;
 }

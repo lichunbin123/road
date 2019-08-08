@@ -4,19 +4,52 @@
     <resultMap id="baseResultMap" type="com.example.crud.bean.ApplicationUser">
         <id column="user_id" property="id" jdbcType="INTEGER"/>
         <result column="user_name" property="username" jdbcType="VARCHAR"/>
-        <result column="user_password" property="userpassword" jdbcType="VARCHAR"/>
+        <result column="user_password" property="password" jdbcType="VARCHAR"/>
+        <result column="user_role" property="role" jdbcType="VARCHAR"/>
+        <result column="time" property="time" jdbcType="TIMESTAMP"/>
     </resultMap>
-    <insert id="insert" parameterType="com.example.crud.bean.ApplicationUser">
+    <!--<insert id="insert" parameterType="com.example.crud.bean.ApplicationUser">-->
+        <!--insert into user(-->
+        <!--user_name, user_password-->
+        <!--)-->
+        <!--values (-->
+         <!--#{username,jdbcType=VARCHAR},-->
+         <!--#{userpassword,jdbcType=VARCHAR}-->
+        <!--)-->
+    <!--</insert>-->
+    <select id="findByName" parameterType="com.example.crud.bean.ApplicationUser" resultMap="baseResultMap">
+        select user_id,user_name,user_password,user_role from user where user_name=#{username}
+    </select>
+
+    <select id="findAll" resultMap="baseResultMap">
+        select * from user
+    </select>
+
+    <select id="findById" parameterType="Integer" resultMap="baseResultMap">
+        select * from user where user_id = #{id}
+    </select>
+
+    <insert id="insertUserMessage" parameterType="com.example.crud.bean.ApplicationUser">
         insert into user(
-        user_name, user_password
-        )
-        values (
+        user_name, user_password, user_role
+        ) values (
          #{username,jdbcType=VARCHAR},
-         #{userpassword,jdbcType=VARCHAR}
+         #{password,jdbcType=VARCHAR},
+         #{role,jdbcType=VARCHAR}
         )
     </insert>
-    <select id="findByName" parameterType="com.example.crud.bean.ApplicationUser" resultMap="baseResultMap">
-        select user_id,user_name,user_password from user where user_name=#{username}
-    </select>
+
+    <delete id="deleteUserMessage" parameterType="Integer">
+        delete from user where user_id = #{id}
+    </delete>
+
+    <update id="updateUserMessage" parameterType="String">
+        update user
+        <set>
+         user_password = #{arg0},
+         user_role = #{arg1},
+        </set>
+        where user_name = #{arg2}
+    </update>
 
 </mapper>

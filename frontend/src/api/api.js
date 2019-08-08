@@ -1,5 +1,5 @@
 import axios from 'axios'
-export { loginProc, logout,getListInfo}
+export { loginProc, logout,getUserInfo}
 
 const enhanceAccessToeken = () => {
   const {accessToken} = localStorage
@@ -19,13 +19,15 @@ function loginProc (data) {
   })
     .catch(function (err) {
       console.log(err.response)
+      console.log(err.response.status)
     })
 }
 
-function getListInfo () {
-  const url = `http://localhost:8083/getAllBlogs`
+function getUserInfo () {
+  const url = `http://localhost:8083/getUserMessage`
   return axios.post(url).then((res) => res.data)
 }
+
 
 function logout () {
   delete localStorage.accessToken

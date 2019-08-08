@@ -14,12 +14,28 @@ public class UserDao {
     public UserDao(UserMapper userMapper) {
         this.userMapper = userMapper;
     }
-    public void insert(ApplicationUser user){
-        userMapper.insert(user);
-    }
 
     public List<ApplicationUser> findByName(String userName){
         return userMapper.findByName(userName);
     }
 
+    public List<ApplicationUser> findAll(){
+        return userMapper.findAll();
+    }
+
+    public void insertUserMessage(ApplicationUser user){
+        userMapper.insertUserMessage(user);
+    }
+
+    public void deleteUserMessage(int id){
+        userMapper.deleteUserMessage(id);
+    }
+
+    public void updateUserMessage(String password,String role,String username){
+        userMapper.updateUserMessage(password,role,username);
+    }
+
+    public List<ApplicationUser> findById(int id){
+        return userMapper.findById(id);
+    }
 }
