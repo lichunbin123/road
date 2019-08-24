@@ -41,10 +41,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 			System.out.println("用户名不存在");
 			throw new UsernameNotFoundException("用户名不存在");
 		}
-
 		return new User(user.getUsername(), encodedPassword, authorities);
-
-
 	}
 
 }

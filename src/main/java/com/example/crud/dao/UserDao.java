@@ -38,4 +38,8 @@ public class UserDao {
     public List<ApplicationUser> findById(int id){
         return userMapper.findById(id);
     }
+
+    public String findRole(String username){
+        return userMapper.findRole(username);
+    }
 }

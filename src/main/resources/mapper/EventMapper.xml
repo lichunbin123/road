@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.EventMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.InitEventMessage">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="eventdate" property="eventdate" jdbcType="VARCHAR"/>
+        <result column="eventtype" property="eventtype" jdbcType="VARCHAR"/>
+        <result column="eventresource" property="eventresource" jdbcType="VARCHAR"/>
+        <result column="eventdesc" property="eventdesc" jdbcType="VARCHAR"/>
+        <result column="eventdeal" property="eventdeal" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="BOOLEAN"/>
+    </resultMap>
+
+    <select id="findEventMessage" resultMap="baseResultMap">
+        select * from initeventmessage
+    </select>
+    <select id="searchcount"  resultType="java.lang.Integer">
+        select count (*) from initeventmessage
+    </select>
+
+    <insert id="insertEventMessage" parameterType="com.example.crud.bean.InitEventMessage">
+        insert into initeventmessage(
+        username, eventdate, eventtype, eventresource, eventdesc, eventdeal, status
+        ) values (
+         #{username,jdbcType=VARCHAR},
+         #{eventdate,jdbcType=VARCHAR},
+         #{eventtype,jdbcType=VARCHAR},
+         #{eventresource,jdbcType=VARCHAR},
+         #{eventdesc,jdbcType=VARCHAR},
+         #{eventdeal,jdbcType=VARCHAR},
+         #{status,jdbcType=BOOLEAN}
+        )
+    </insert>
+
+
+
+    <delete id="deleteEventMessage" parameterType="Integer">
+        delete from initeventmessage where id = #{id}
+    </delete>
+</mapper>

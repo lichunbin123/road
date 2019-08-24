@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.EventAnalysisMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.EventAnalysis">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="eventone" property="eventone" jdbcType="VARCHAR"/>
+        <result column="eventtwo" property="eventtwo" jdbcType="VARCHAR"/>
+        <result column="eventthree" property="eventthree" jdbcType="VARCHAR"/>
+        <result column="eventfour" property="eventfour" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="searchformonth" parameterType="String" resultMap="baseResultMap">
+        select count(case when eventtype='事故' and eventdate like CONCAT('%-',#{month},'%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT('%-',#{month},'-%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT('%-',#{month},'-%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT('%-',#{month},'-%') then 1 end) as eventfour
+        from alleventmessage;
+    </select>
+
+    <select id="searchforyear" parameterType="String" resultMap="baseResultMap">
+        select count(case when eventtype='事故' and eventdate like CONCAT(#{year},'%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'%') then 1 end) as eventfour
+        from alleventmessage;
+
+    </select>
+
+    <select id="searchfordefault" parameterType="String" resultMap="baseResultMap">
+        select count(case when eventtype='事故' and eventdate like CONCAT(#{now},'%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{now},'%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{now},'%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{now},'%') then 1 end) as eventfour
+        from alleventmessage;
+
+    </select>
+</mapper>

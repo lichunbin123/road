@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div id="main" class="main">
      <el-form ref="mainForm"  class="main-container">
       <el-row>
         <el-button type="primary" @click="application()" round >平台应用管理</el-button>
@@ -40,6 +40,16 @@
 </script>
 
 <style scoped>
+  #main{
+    background:url("/static/6.gif");
+    background-size: 100% 100%;
+    height: 100%;
+    position: fixed;
+    width: 100%
+  }
+  /*.main{*/
+    /*background:url("/static/katong.jpg");*/
+  /*}*/
   .el-form {
     text-align: center;
   }

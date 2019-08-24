@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.NewEventMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.EventMessage">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="eventdate" property="eventdate" jdbcType="VARCHAR"/>
+        <result column="eventtype" property="eventtype" jdbcType="VARCHAR"/>
+        <result column="eventresource" property="eventresource" jdbcType="VARCHAR"/>
+        <result column="eventdesc" property="eventdesc" jdbcType="VARCHAR"/>
+        <result column="eventdeal" property="eventdeal" jdbcType="VARCHAR"/>
+        <result column="eventsure" property="eventsure" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <resultMap id="eventAnalysisMap" type="com.example.crud.bean.EventAnalysis">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="eventone" property="eventone" jdbcType="VARCHAR"/>
+        <result column="eventtwo" property="eventtwo" jdbcType="VARCHAR"/>
+        <result column="eventthree" property="eventthree" jdbcType="VARCHAR"/>
+        <result column="eventfour" property="eventfour" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findEventMessage" resultMap="baseResultMap">
+        select * from neweventmessage
+    </select>
+
+    <select id="searchlistofsuccess" resultMap="baseResultMap">
+        select * from neweventmessage
+        where eventsure = '审核通过'
+    </select>
+
+    <select id="searchlistoffail" resultMap="baseResultMap">
+        select * from neweventmessage
+        where eventsure = '审核未通过'
+    </select>
+
+
+    <select id="findAllEventMessage" resultMap="baseResultMap">
+        select * from alleventmessage
+    </select>
+
+    <select id="searchcountofsuccess" resultType="Integer">
+        select count(*) from neweventmessage
+        where eventsure = '审核通过'
+    </select>
+
+    <select id="searchcountoffail" parameterType="String" resultType="java.lang.Integer">
+        SELECT count(*) FROM neweventmessage
+        where eventsure = '审核未通过'
+    </select>
+
+    <insert id="insertNewEventMessage" parameterType="com.example.crud.bean.EventMessage">
+        insert into neweventmessage(
+        username, eventdate, eventtype, eventresource, eventdesc, eventdeal, eventsure
+        ) values (
+         #{username,jdbcType=VARCHAR},
+         #{eventdate,jdbcType=VARCHAR},
+         #{eventtype,jdbcType=VARCHAR},
+         #{eventresource,jdbcType=VARCHAR},
+         #{eventdesc,jdbcType=VARCHAR},
+         #{eventdeal,jdbcType=VARCHAR},
+         #{eventsure,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <insert id="insertAllEventMessage" parameterType="com.example.crud.bean.EventMessage">
+        insert into alleventmessage(
+        username, eventdate, eventtype, eventresource, eventdesc, eventdeal, eventsure
+        ) values (
+         #{username,jdbcType=VARCHAR},
+         #{eventdate,jdbcType=VARCHAR},
+         #{eventtype,jdbcType=VARCHAR},
+         #{eventresource,jdbcType=VARCHAR},
+         #{eventdesc,jdbcType=VARCHAR},
+         #{eventdeal,jdbcType=VARCHAR},
+         #{eventsure,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <delete id="deleteEventMessage" parameterType="Integer">
+        delete from neweventmessage where id = #{id}
+    </delete>
+
+    <delete id="deleteListOfSuccess">
+        delete from neweventmessage where eventsure = '审核通过'
+    </delete>
+
+    <delete id="deleteListOfFail">
+        delete from neweventmessage where eventsure = '审核未通过'
+    </delete>
+
+</mapper>

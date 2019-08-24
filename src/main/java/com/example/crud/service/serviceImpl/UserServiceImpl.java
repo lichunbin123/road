@@ -65,5 +65,11 @@ public class UserServiceImpl implements UserService {
                 .httpStatus(HttpStatus.OK).build();
     }
 
+    @Override
+    public ResponseMessage findRole(String username) {
+       return  ResponseMessage.<String>builder().successStatus(true).messageContent(userDao.findRole(username))
+               .httpStatus(HttpStatus.OK).build();
+    }
+
 
 }

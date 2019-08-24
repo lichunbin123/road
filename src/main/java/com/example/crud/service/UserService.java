@@ -10,4 +10,5 @@ public interface UserService {
     ResponseMessage deleteUserMessage(int id);
     ResponseMessage updateUserMessage(ApplicationUser user);
     ResponseMessage findById(int id);
+    ResponseMessage findRole(String username);
 }

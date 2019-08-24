@@ -44,15 +44,12 @@
 
   #login{
   }
-
-
-
-
 </style>
 
 <script>
   import axios from 'axios'
   import { loginProc} from '@/api/api'
+  import Cookies from 'js-cookie'
   export default {
     name: "#login",
     data() {
@@ -69,30 +66,49 @@
             {required: true, message: '请输入密码', trigger: 'blur'}
           ],
         },
-
+        userrole: ''
       }
     },
     methods: {
       login:function () {
         let data = this.loginForm;
-        console.log("data==="+data)
         const url = `http://localhost:8083/login`
         return axios({
           method: 'post',
           url: url,
           data: data
         }).then(res => {
+          console.log("res.data==="+res.data);
           localStorage.accessToken = res.data
           axios.defaults.headers.common['Authorization'] = `Bearer ${res.data}`
-          console.log(res.status)
-          this.$router.push('/main')
+          Cookies.set('username',this.loginForm.username,30);
+          this.findrole();
         }).catch(err => {
             console.log(err.response)
             this.$message("登录失败")
           })
-      }
       },
-
+      findrole: function () {
+        var username = this.loginForm.username;
+        const url = `http://localhost:8083/findrole`
+        return axios({
+          method: 'post',
+          url: url,
+          params: {
+            username: username
+          }
+        }).then(res => {
+          var result = res.data.messageContent;
+          this.userrole = result;
+          console.log("this.userrole==="+this.userrole);
+          if (this.userrole==='admin'){
+            this.$router.push('/main')
+          }else {
+            this.$router.push('/mainofuser')
+          }
+        })
+      }
+    },
   }
 </script>
 

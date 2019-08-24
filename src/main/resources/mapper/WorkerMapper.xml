@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.WorkerMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.Worker">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="classname" property="classname" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="job" property="job" jdbcType="VARCHAR"/>
+        <result column="monday" property="monday" jdbcType="VARCHAR"/>
+        <result column="tuesday" property="tuesday" jdbcType="VARCHAR"/>
+        <result column="wednesday" property="wednesday" jdbcType="VARCHAR"/>
+        <result column="thursday" property="thursday" jdbcType="VARCHAR"/>
+        <result column="friday" property="friday" jdbcType="VARCHAR"/>
+        <result column="saturday" property="saturday" jdbcType="VARCHAR"/>
+        <result column="sunday" property="sunday" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="insertWorker" parameterType="java.util.List">
+        insert into classwithworker(classname, name, job, monday,tuesday,wednesday,thursday,friday,saturday,sunday)
+        values
+        <foreach collection="list" item="Worker" separator=",">
+            (
+            #{Worker.classname},
+            #{Worker.name},
+            #{Worker.job},
+            #{Worker.monday},
+            #{Worker.tuesday},
+            #{Worker.wednesday},
+            #{Worker.thursday},
+            #{Worker.friday},
+            #{Worker.saturday},
+            #{Worker.sunday}
+            )
+       </foreach>
+    </insert>
+
+    <select id="findAllWorker" resultMap="baseResultMap">
+        select classname,name,job,monday,tuesday,wednesday,thursday,friday,saturday,sunday from classwithworker where classname = #{classname}
+    </select>
+</mapper>

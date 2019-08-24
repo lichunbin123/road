@@ -10,10 +10,8 @@ import io.goeasy.publish.PublishListener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
 /**
  * @author: lcb
  * @Date: 2019  6/17/19  9:11 PM
@@ -31,6 +29,16 @@ public class UserController {
     @ResponseBody
     public void EnterApplication(){
         System.out.println("had enter application page");
+    }
+    @RequestMapping("/application/mainofuser")
+    @ResponseBody
+    public void EnterApplicationOfUser(){
+        System.out.println("had enter application page of user");
+    }
+    @RequestMapping("/monitoring/mainofuser")
+    @ResponseBody
+    public void EnterMonitoringOfUser(){
+        System.out.println("had enter monitoring page of user");
     }
 
 //    @RequestMapping("/monitoring")
@@ -84,6 +92,12 @@ public class UserController {
     public ResponseEntity<ResponseMessage> findById(@PathVariable int id){
         System.out.println("had enter findById and id ==="+id);
         ResponseMessage responseMessage = userService.findById(id);
+        return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
+    }
+    @RequestMapping("/findrole")
+    @ResponseBody
+    public ResponseEntity<ResponseMessage> searchworker(@RequestParam(value = "username") String username){
+        ResponseMessage responseMessage = userService.findRole(username);
         return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
     }
 }

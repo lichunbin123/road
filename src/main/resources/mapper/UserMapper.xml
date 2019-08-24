@@ -8,6 +8,9 @@
         <result column="user_role" property="role" jdbcType="VARCHAR"/>
         <result column="time" property="time" jdbcType="TIMESTAMP"/>
     </resultMap>
+    <!--<resultMap id="roleResultMap" type="String">-->
+        <!--<result column="user_role" property="role" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
     <!--<insert id="insert" parameterType="com.example.crud.bean.ApplicationUser">-->
         <!--insert into user(-->
         <!--user_name, user_password-->
@@ -19,6 +22,9 @@
     <!--</insert>-->
     <select id="findByName" parameterType="com.example.crud.bean.ApplicationUser" resultMap="baseResultMap">
         select user_id,user_name,user_password,user_role from user where user_name=#{username}
+    </select>
+    <select id="findRole" parameterType="String" resultType="String">
+        select user_role from user where user_name=#{username}
     </select>
 
     <select id="findAll" resultMap="baseResultMap">

@@ -14,4 +14,5 @@ public interface UserMapper {
     void deleteUserMessage(int id);
     void updateUserMessage(String password,String role,String username);
     List<ApplicationUser> findById(int id);
+    String findRole(String username);
 }

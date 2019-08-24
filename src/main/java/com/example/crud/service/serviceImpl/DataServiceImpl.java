@@ -19,11 +19,11 @@ import org.springframework.stereotype.Component;
 public class DataServiceImpl implements DataService {
     private SparkStreaming_kafka_producer sparkStreaming_kafka_producer;
     private SparkStreaming_kafka_consumer sparkStreaming_kafka_consumer;
-    @Autowired
-    public DataServiceImpl(SparkStreaming_kafka_producer sparkStreaming_kafka_producer,SparkStreaming_kafka_consumer sparkStreaming_kafka_consumer){
-        this.sparkStreaming_kafka_producer = sparkStreaming_kafka_producer;
-        this.sparkStreaming_kafka_consumer = sparkStreaming_kafka_consumer;
-    }
+//    @Autowired
+//    public DataServiceImpl(SparkStreaming_kafka_producer sparkStreaming_kafka_producer,SparkStreaming_kafka_consumer sparkStreaming_kafka_consumer){
+//        this.sparkStreaming_kafka_producer = sparkStreaming_kafka_producer;
+//        this.sparkStreaming_kafka_consumer = sparkStreaming_kafka_consumer;
+//    }
     @Override
     public ResponseMessage producer() {
         try {

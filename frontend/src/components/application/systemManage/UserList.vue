@@ -88,6 +88,7 @@
           var result = res.data;
           console.log(result)
           this.tableData = result.responseData;
+          console.log("this.tableData==="+this.tableData);
         }).catch(err => {
           console.log(err.response)
           this.$message("获取用户信息失败")

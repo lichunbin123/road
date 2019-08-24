@@ -13,13 +13,15 @@
     "axios": "^0.18.0",
     "echarts": "^4.2.1",
     "element-ui": "^2.6.3",
+    "file-saver": "^2.0.2",
     "moment": "^2.24.0",
+    "sockjs-client": "latest",
     "vue": "^2.5.2",
     "vue-baidu-map": "^0.21.21",
     "vue-resource": "^1.5.1",
     "vue-router": "^3.0.1",
     "webstomp-client": "latest",
-    "sockjs-client": "latest"
+    "xlsx": "^0.15.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

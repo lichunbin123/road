@@ -5,29 +5,33 @@
     </div>
     <div>
       <el-button type="primary" icon="el-icon-circle-plus" style="float: right" @click="dialogFormVisible = true">添加班次</el-button>
-      <el-dialog title="班次信息" :visible.sync="dialogFormVisible" style="margin-left:500px; width: 900px">
-      <el-form :model="dynamicValidateForm" ref="dynamicValidateForm"  label-width="100px" class="demo-dynamic">
+      <el-dialog title="班次信息" :visible.sync="dialogFormVisible" style="margin-left:500px; width: 1000px">
+      <el-form :model="classmessage" ref="classmessage"  label-width="100px" class="demo-dynamic">
+        <el-form-item label="班次名称">
+          <el-input v-model="classmessage.newclassname"></el-input>
+        </el-form-item>
         <el-form-item label="班次类型">
-          <el-select v-model="dynamicValidateForm.classtype" placeholder="请选择">
+          <el-select v-model="classmessage.newclasstype" placeholder="请选择">
             <el-option label="领导班" value="leader"></el-option>
             <el-option label="普通员工班" value="emplyee"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item
-          v-for="(domain, index) in dynamicValidateForm.domains"
-          :label="'成员' + index"
-          :key="domain.key"
-          :prop="'domains.' + index + '.value'"
-          :rules="{
-      required: true, message: '成员不能为空', trigger: 'blur'
-    }"
-        >
-          <el-input v-model="domain.value"></el-input>
-          <!--<el-button @click.prevent="removeDomain(domain)">删除</el-button>-->
+        <el-form-item label="值班时间">
+          <el-date-picker
+            v-model="classmessage.newdate"
+            type="daterange"
+            align="right"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            format="yyyy 年 MM 月 dd 日"
+            value-format="yyyy-MM-dd"
+            >
+          </el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="submitForm('dynamicValidateForm')">提交</el-button>
-          <el-button @click="addDomain">增加成员</el-button>
+          <el-button type="primary" @click="submitForm('classmessage')">提交</el-button>
         </el-form-item>
       </el-form>
       </el-dialog>
@@ -38,29 +42,29 @@
         border
         style="width: 100%">
         <el-table-column
-          prop="classname"
+          prop="newclassname"
           label="班次名称"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="definetype"
-          label="定义类型"
-          width="180">
-        </el-table-column>
-        <el-table-column
-          prop="classtype"
+          prop="newclasstype"
           label="班次类型"
           width="180">
         </el-table-column>
         <el-table-column
-          prop="date"
-          label="起止时间">
+          prop="startdate"
+          label="起始时间">
+        </el-table-column>
+        <el-table-column
+          prop="enddate"
+          label="结束时间">
         </el-table-column>
         <el-table-column
           prop="operation"
           label="操作">
           <template slot-scope="scope">
-            <el-button @click="handleClick(scope.row)" type="text" size="small">查看</el-button>
+            <el-button @click="search(scope.row)" type="text" size="small">查看</el-button>
+            <el-button @click="edit(scope.row,scope.newclassname)" type="text" size="small">编辑</el-button>
             <el-button type="text" size="small">移除</el-button>
           </template>
         </el-table-column>
@@ -70,51 +74,79 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
       name: "ClassManage",
       data() {
         return {
-          tableData: [{
-            classname: '142012',
-            definetype: '自定义',
-            classtype: '领导班',
-            date: '2012-2013',
-
-          }, {
-            classname: '142012',
-            definetype: '自定义',
-            classtype: '领导班',
-            date: '2012-2013',
-          }, {
-            classname: '142012',
-            definetype: '自定义',
-            classtype: '领导班',
-            date: '2012-2013',
-          }, {
-            classname: '142012',
-            definetype: '自定义',
-            classtype: '领导班',
-            date: '2012-2013',
-          }],
+          tableData: [],
           dialogTableVisible: false,
           dialogFormVisible: false,
-          dynamicValidateForm: {
-            domains: [{
-              value: ''
-            }],
-          }
+          classmessage: {
+            newclassname: '',
+            newclasstype: '',
+            newdate: '',
+          },
         }
       },
+      created(){
+        this.searchMessage();
+      },
       methods: {
-        submitForm(formName) {
-          this.$refs[formName].validate((valid) => {
-            if (valid) {
-              alert('submit!');
-            } else {
-              console.log('error submit!!');
-              return false;
+        submitForm:function () {
+         let data = this.classmessage;
+          this.dialogFormVisible = false;
+         console.log("classmessage.newclassname==="+data.newclassname);
+         console.log("classmessage.newclassname==="+data.newdate);
+         console.log("classmessage.newclassname==="+data.newclasstype);
+         const url = `http://localhost:8083/application/addclass`
+          return axios({
+            method: 'post',
+            url: url,
+            data: data
+          }).then(res => {
+            if (res.status == 200){
+              this.$message("增加班次成功");
+              this.searchMessage();
             }
-          });
+          })
+        },
+        searchMessage(){
+          const url = `http://localhost:8083/application/searchmessage`
+          return axios({
+            method: 'post',
+            url: url,
+          }).then(res => {
+            if (res.status == 200){
+              var result = res.data;
+              console.log("result.responseData===="+result.responseData)
+              this.tableData = result.responseData;
+              this.$message("查询班次信息成功");
+            }
+          }).catch(err =>{
+            console.log(err.response);
+            this.$message("获取班次信息错误")
+          })
+        },
+        search(row){
+          var classname = row.newclassname;
+          console.log("row.newclassname"+classname);
+          this.$router.push({
+            path: '/application/classwithworkers',
+            query: {
+              classname: classname
+            }
+          })
+        },
+        edit:function(row){
+          var classname = row.newclassname;
+          console.log("row==="+classname);
+          this.$router.push({
+            path: '/application/add',
+            query: {
+              classname: classname
+            }
+          })
         },
         resetForm(formName) {
           this.$refs[formName].resetFields();

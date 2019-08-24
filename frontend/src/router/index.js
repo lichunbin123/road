@@ -8,6 +8,14 @@ import AddUserList from '@/components/application/systemManage/AddUserList'
 import UpdateBlog from '@/components/application/systemManage/UpdateBlog'
 import BaiduMap from '@/components/monitoring/basicInfoManage/BaiduMap'
 import ChartViews from '@/components/monitoring/analysisSystem/ChartViews'
+import AddWorker from '@/components/application/schedulingManage/AddWorker'
+import ClassWithWorkers from '@/components/application/schedulingManage/ClassWithWokers'
+import MainPageOfUser from '@/components/MainPageOfUser'
+import Video from '@/components/monitoring/videoMonitor/Video'
+import MainOfUser from '@/components/application/MainOfUser'
+import AllRoadEvent from '@/components/application/eventManage/AllRoadEvent'
+import appMainOfUser from '@/components/application/MainOfUser'
+import monitorMainOfUser from '@/components/monitoring/MainOfUser'
 Vue.use(Router)
 
 export default new Router({
@@ -51,6 +59,47 @@ export default new Router({
       path: '/chartview',
       name: 'ChartViews',
       component: ChartViews
+    },
+    {
+      path: '/application/add',
+      name: 'add',
+      component: AddWorker
+    },
+    {
+      path: '/application/classwithworkers',
+      name: 'classwithworkers',
+      component: ClassWithWorkers
+    },
+    {
+      path: '/mainofuser',
+      name: 'MainPageOfUser',
+      component: MainPageOfUser
+    },
+    {
+      path: '/monitoring/video',
+      name: 'Video',
+      component: Video
+    },
+    {
+      path: '/monitoring/mainofuser',
+      name: 'monitorMainOfUser',
+      component: monitorMainOfUser
+    },
+    {
+      path: '/application/mainofuser',
+      name: 'MainOfUser',
+      component: MainOfUser
+    },
+    {
+      path: '/application/allroadevent',
+      name: 'AllRoadEvent',
+      component: AllRoadEvent
+    },
+    {
+      path: '/application/mainofuser',
+      name: 'appMainOfUser',
+      component: appMainOfUser
     }
+
   ]
 })

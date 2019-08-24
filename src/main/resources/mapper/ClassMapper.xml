@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.ClassMessageMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.ClassMessageNew">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="classname" property="newclassname" jdbcType="VARCHAR"/>
+        <result column="classtype" property="newclasstype" jdbcType="VARCHAR"/>
+        <result column="startdate" property="startdate" jdbcType="VARCHAR"/>
+        <result column="enddate" property="enddate" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="findAllClassMessage" resultMap="baseResultMap">
+        select * from classmessage
+    </select>
+
+    <insert id="insertClassMessage" parameterType="com.example.crud.bean.ClassMessageNew">
+        insert into classmessage(
+        classname, classtype, startdate, enddate
+        ) values (
+         #{newclassname,jdbcType=VARCHAR},
+         #{newclasstype,jdbcType=VARCHAR},
+         #{startdate,jdbcType=VARCHAR},
+         #{enddate,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <delete id="deleteClassMessage" parameterType="Integer">
+        delete from classmessage where id = #{id}
+    </delete>
+</mapper>

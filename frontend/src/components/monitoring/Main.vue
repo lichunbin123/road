@@ -1,9 +1,17 @@
 <template>
   <div id="main">
     <div class="header">
-    <i class="el-icon-video-camera-solid"></i>
     <h >路网运行监测管理</h>
-      <el-link :underline="false" style="float: right; margin-right: 30px; font-size: 20px"><router-link to="/main">系统首页</router-link></el-link>
+      <el-dropdown trigger="hover" v-if="username">
+        <span style="margin-left:1670px; font-size:20px; color:#fff;">{{username}}<img style="width:40px; height:40px;border-radius: 20px; margin-left:10px; margin-top:10px;" src="/static/12.jpg" /></span>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>我的消息</el-dropdown-item>
+          <el-dropdown-item>设置</el-dropdown-item>
+          <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <el-link v-else="username" style="margin-left:1600px; font-size:20px;"><router-link to="/">您当前未登录,点击登录!</router-link></el-link>
+      <el-link :underline="false" style="float: right; font-size: 20px"><router-link to="/mainofuser">系统首页</router-link></el-link>
     </div>
     <div>
       <el-menu
@@ -16,7 +24,7 @@
         active-text-color="#ffd04b">
         <el-menu-item index="1" @click="click">公路基础信息</el-menu-item>
         <el-menu-item index="2" @click="trafficclick()">交通流量监测</el-menu-item>
-        <el-menu-item index="3">运行视频监控</el-menu-item>
+        <el-menu-item index="3" @click="tovideo()">运行视频监控</el-menu-item>
         <el-menu-item index="4">移动监测管理</el-menu-item>
         <el-menu-item index="5">运行统计分析</el-menu-item>
         <el-menu-item index="6">技术监测与预警</el-menu-item>
@@ -31,7 +39,7 @@
     <div>
       <ChartViews v-if="cls"></ChartViews>
       <BaiduMap v-if="flag"></BaiduMap>
-      <!--<div id="myChart" style="width: 600px;height:200px;"></div>-->
+      <Video v-if="to"></Video>
     </div>
   </div>
 </template>
@@ -40,24 +48,30 @@
   import axios from 'axios';
   import ChartViews from "./analysisSystem/ChartViews.vue";
   import BaiduMap from "./basicInfoManage/BaiduMap";
+  import Video from "./videoMonitor/Video";
+  import Cookies from 'js-cookie'
   export default {
     name: 'Main',
-    components: { ChartViews,BaiduMap },
+    components: { ChartViews,BaiduMap,Video },
     data () {
       return {
         flag: false,
         cls: false,
+        to: false,
+        username: Cookies.get('username'),
       }
     },
     methods: {
       click() {
         this.flag = true;
-        this.cls = false
+        this.cls = false;
+        this.to = false;
         console.log("click is useful")
       },
       trafficclick: function(){
         this.cls = true;
         this.flag = false;
+        this.to = false;
         const url = `http://localhost:8083/trafficMonitor`
         return axios.post(url).then(res => {
           console.log(res.status)
@@ -65,6 +79,11 @@
         }).catch(err => {
           console.log(err.response)
         })
+      },
+      tovideo: function () {
+        this.to = true;
+        this.flag = false;
+        this.cls = false;
       }
     }
   }
@@ -77,8 +96,5 @@
     font-size: 30px;
     height: 75px;
     line-height: 75px;
-  }
-  .el-icon-video-camera-solid {
-    margin-left: 10px;
   }
 </style>
