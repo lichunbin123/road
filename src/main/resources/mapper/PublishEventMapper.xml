@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.PublishEventMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.PublishEvent">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="classification" property="classification" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="author" property="author" jdbcType="VARCHAR"/>
+        <result column="origin" property="origin" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="LONGVARCHAR"/>
+        <result column="date" property="date" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="loadNewsTitle" resultMap="baseResultMap">
+        select title,date from publishevent order by id DESC limit 5
+    </select>
+    <select id="loadNews"  resultMap="baseResultMap">
+        select * from publishevent order by id DESC
+    </select>
+    <select id="loadNewsContent"  resultMap="baseResultMap" parameterType="String">
+        select * from publishevent where title = #{title}
+    </select>
+
+    <insert id="insertPublishEvent" parameterType="com.example.crud.bean.PublishEvent">
+        insert into publishevent(
+        classification, title, author, origin, content, date
+        ) values (
+         #{classification,jdbcType=VARCHAR},
+         #{title,jdbcType=VARCHAR},
+         #{author,jdbcType=VARCHAR},
+         #{origin,jdbcType=VARCHAR},
+         #{content,jdbcType=LONGVARCHAR},
+         #{date,jdbcType=VARCHAR}
+        )
+    </insert>
+</mapper>

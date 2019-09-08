@@ -6,6 +6,13 @@ import router from './router'
 import echarts from 'echarts'
 import axios from 'axios'
 import moment from "moment"
+import  VueQuillEditor from 'vue-quill-editor'
+// 引入样式和主题
+import 'quill/dist/quill.core.css'
+import 'quill/dist/quill.snow.css'
+import 'quill/dist/quill.bubble.css'
+//注册
+Vue.use(VueQuillEditor)
 
 Vue.prototype.$moment = moment;
 Vue.prototype.$axios = axios;

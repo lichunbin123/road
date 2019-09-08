@@ -16,6 +16,9 @@ import MainOfUser from '@/components/application/MainOfUser'
 import AllRoadEvent from '@/components/application/eventManage/AllRoadEvent'
 import appMainOfUser from '@/components/application/MainOfUser'
 import monitorMainOfUser from '@/components/monitoring/MainOfUser'
+import publishMain from '@/components/publish/Main'
+import NewsMessage from '@/components/publish/NewsMessage'
+import NewsContent from '@/components/publish/unchangeInfo/NewsContent'
 Vue.use(Router)
 
 export default new Router({
@@ -99,7 +102,21 @@ export default new Router({
       path: '/application/mainofuser',
       name: 'appMainOfUser',
       component: appMainOfUser
+    },
+    {
+      path: '/publish',
+      name: 'publishMain',
+      component: publishMain
+    },
+    {
+      path: '/publish/news',
+      name: 'NewsMessage',
+      component: NewsMessage
+    },
+    {
+      path: '/publish/content',
+      name: 'NewsContent',
+      component: NewsContent
     }
-
   ]
 })

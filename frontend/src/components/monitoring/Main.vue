@@ -1,7 +1,7 @@
 <template>
   <div id="main">
     <div class="header">
-    <h >路网运行监测管理</h>
+      <h >路网运行监测管理</h>
       <el-dropdown trigger="hover" v-if="username">
         <span style="margin-left:1670px; font-size:20px; color:#fff;">{{username}}<img style="width:40px; height:40px;border-radius: 20px; margin-left:10px; margin-top:10px;" src="/static/12.jpg" /></span>
         <el-dropdown-menu slot="dropdown">
@@ -11,7 +11,7 @@
         </el-dropdown-menu>
       </el-dropdown>
       <el-link v-else="username" style="margin-left:1600px; font-size:20px;"><router-link to="/">您当前未登录,点击登录!</router-link></el-link>
-      <el-link :underline="false" style="float: right; font-size: 20px"><router-link to="/mainofuser">系统首页</router-link></el-link>
+      <el-link :underline="false" style="float: right; font-size: 20px"><router-link to="/main">系统首页</router-link></el-link>
     </div>
     <div>
       <el-menu
@@ -30,9 +30,9 @@
         <el-menu-item index="6">技术监测与预警</el-menu-item>
         <el-submenu index="7">
           <template slot="title">外场设备管理</template>
-          <el-menu-item index="7-1" >设备档案</el-menu-item>
-          <el-menu-item index="7-2" >设备维修记录</el-menu-item>
-          <el-menu-item index="7-3" >设备运行状态监控</el-menu-item>
+          <el-menu-item index="7-1" @click="toequipmessage">设备档案</el-menu-item>
+          <el-menu-item index="7-2" @click="tomaintenancerecord">设备维修记录</el-menu-item>
+          <el-menu-item index="7-3" @click="torunstate">设备运行状态监控</el-menu-item>
         </el-submenu>
       </el-menu>
     </div>
@@ -40,6 +40,9 @@
       <ChartViews v-if="cls"></ChartViews>
       <BaiduMap v-if="flag"></BaiduMap>
       <Video v-if="to"></Video>
+      <Archives v-if="toequip"></Archives>
+      <MaintenanceRecord v-if="torecord"></MaintenanceRecord>
+      <StateMonitor v-if="tostate"></StateMonitor>
     </div>
   </div>
 </template>
@@ -49,15 +52,21 @@
   import ChartViews from "./analysisSystem/ChartViews.vue";
   import BaiduMap from "./basicInfoManage/BaiduMap";
   import Video from "./videoMonitor/Video";
+  import Archives from "./equipmentManage/Archives";
+  import MaintenanceRecord from "./equipmentManage/MaintenanceRecord";
+  import StateMonitor from "./equipmentManage/StateMonitor";
   import Cookies from 'js-cookie'
   export default {
-    name: 'Main',
-    components: { ChartViews,BaiduMap,Video },
+    name: 'MainOfUser',
+    components: { ChartViews,BaiduMap,Video,Archives,MaintenanceRecord,StateMonitor },
     data () {
       return {
         flag: false,
         cls: false,
         to: false,
+        toequip: false,
+        torecord: false,
+        tostate: false,
         username: Cookies.get('username'),
       }
     },
@@ -66,12 +75,18 @@
         this.flag = true;
         this.cls = false;
         this.to = false;
+        this.toequip = false;
+        this.torecord = false;
+        this.tostate = false;
         console.log("click is useful")
       },
       trafficclick: function(){
         this.cls = true;
         this.flag = false;
         this.to = false;
+        this.toequip = false;
+        this.torecord = false;
+        this.tostate = false;
         const url = `http://localhost:8083/trafficMonitor`
         return axios.post(url).then(res => {
           console.log(res.status)
@@ -84,6 +99,33 @@
         this.to = true;
         this.flag = false;
         this.cls = false;
+        this.toequip = false;
+        this.torecord = false;
+        this.tostate = false;
+      },
+      toequipmessage(){
+        this.toequip = true;
+        this.to = false;
+        this.flag = false;
+        this.cls = false;
+        this.torecord = false;
+        this.tostate = false;
+      },
+      tomaintenancerecord(){
+        this.torecord = true;
+        this.to = false;
+        this.flag = false;
+        this.cls = false;
+        this.tostate = false;
+        this.toequip = false;
+      },
+      torunstate(){
+        this.tostate = true;
+        this.cls = false;
+        this.flag = false;
+        this.torecord = false;
+        this.toequip = false;
+        this.to = false;
       }
     }
   }

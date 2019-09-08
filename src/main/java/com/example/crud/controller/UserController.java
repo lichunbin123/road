@@ -40,26 +40,12 @@ public class UserController {
     public void EnterMonitoringOfUser(){
         System.out.println("had enter monitoring page of user");
     }
+    @RequestMapping("/publish")
+    @ResponseBody
+    public void EnterPublish(){
+        System.out.println("had enter publish page");
+    }
 
-//    @RequestMapping("/monitoring")
-//    @ResponseBody
-//    public void EnterMonitoring(){
-//        System.out.println("进入监控模块");
-//        //        dataService.producer();
-////        dataService.consumer();
-////        dataService.publishMessage();
-////        GoEasy goEasy = new GoEasy("rest-hangzhou.goeasy.io","BC-1fd590eb9aef46a6809486626b4199a2");
-////        goEasy.publish("trafficFlow","第一个goeasy",new PublishListener(){
-////            @Override
-////            public void onSuccess() {
-////                System.out.print("消息发布成功 ");
-////            }
-////            @Override
-////            public void onFailed(GoEasyError error) {
-////                System.out.print("消息发布失败 ,  错误编码：" + error.getCode());
-////            }
-////        });
-//    }
     @RequestMapping("/getUserMessage")
     @ResponseBody
     public ResponseEntity<ResponseMessage> getUserMessage(){

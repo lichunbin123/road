@@ -1,11 +1,8 @@
 <template>
-  <div style="height:100%;">
+  <div>
     <div class="header" id="header">
       <h >公路基础信息Map</h>
     </div>
-    <!--<div class="search" id="Search">-->
-      <!--<input type="text" id="suggestId" name="address_detail" placeholder="地址" v-model="address_detail" class="input_style">-->
-    <!--</div>-->
     <div class="map" id="Map">
     </div>
   </div>
@@ -38,6 +35,12 @@
         // map.setMapStyleV2({
         //   styleId: 'c546bff8e46a1d5844313c41d8994b95'
         // });
+        //添加路况信息
+        const ctrl = new BMapLib.TrafficControl({
+          showPanel: false
+        });
+        map.addControl(ctrl);
+        ctrl.setAnchor(BMAP_ANCHOR_TOP_RIGHT);
 
         //添加城市列表
         map.enableInertialDragging();
@@ -59,6 +62,29 @@
           //   alert('after');
           // }
         }));
+        // 添加定位控件
+        var geolocationControl = new BMap.GeolocationControl();
+        geolocationControl.addEventListener("locationSuccess", function(e){
+          // 定位成功事件
+          var address = '';
+          address += e.addressComponent.province;
+          address += e.addressComponent.city;
+          address += e.addressComponent.district;
+          address += e.addressComponent.street;
+          address += e.addressComponent.streetNumber;
+        });
+        geolocationControl.addEventListener("locationError",function(e){
+          // 定位失败事件
+          alert(e.message);
+        });
+        map.addControl(geolocationControl);
+
+        //添加全景
+
+        var stCtrl = new BMap.PanoramaControl(); //构造全景控件
+        stCtrl.setAnchor(BMAP_ANCHOR_BOTTOM_RIGHT);
+        stCtrl.setOffset(new BMap.Size(20, 20));
+        map.addControl(stCtrl);//添加全景控件
 
         // 定义一个控件类,即function
         function ZoomControl() {
@@ -153,5 +179,4 @@
     height: 50px;
     line-height: 50px;
   }
-
 </style>
