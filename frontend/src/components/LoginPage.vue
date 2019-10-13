@@ -43,6 +43,11 @@
   }
 
   #login{
+    /*background-image: url("/static/login.jpg");*/
+    /*background-size: 100% 100%;*/
+    /*height: 100%;*/
+    /*position: fixed;*/
+    /*width: 100%;*/
   }
 </style>
 

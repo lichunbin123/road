@@ -124,4 +124,26 @@ public class NewEventMessageImpl implements NewEventService {
             return ResponseMessage.builder().successStatus(false).httpStatus(HttpStatus.CONFLICT).messageContent("信息为空").build();
         }
     }
+
+    @Override
+    public ResponseMessage searchForEvery(String year) {
+        List<EventAnalysis> list = newEventDao.searchForEvery(year);
+        if (list != null && list.size()>0){
+            return ResponseMessage.<EventAnalysis>builder().successStatus(true).responseData(list)
+                    .httpStatus(HttpStatus.OK).build();
+        }else{
+            return ResponseMessage.builder().successStatus(false).httpStatus(HttpStatus.CONFLICT).messageContent("信息为空").build();
+        }
+    }
+
+    @Override
+    public ResponseMessage searchForEveryDefault(String year) {
+        List<EventAnalysis> list = newEventDao.searchForEveryDefault(year);
+        if (list != null && list.size() > 0) {
+            return ResponseMessage.<EventAnalysis>builder().successStatus(true).responseData(list)
+                    .httpStatus(HttpStatus.OK).build();
+        } else {
+            return ResponseMessage.builder().successStatus(false).httpStatus(HttpStatus.CONFLICT).messageContent("信息为空").build();
+        }
+    }
 }

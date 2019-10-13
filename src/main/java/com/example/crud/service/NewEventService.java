@@ -20,4 +20,6 @@ public interface NewEventService {
     ResponseMessage searchForYear(String year);
     ResponseMessage searchForMonth(String month);
     ResponseMessage searchForDefault(String now);
+    ResponseMessage searchForEvery(String year);
+    ResponseMessage searchForEveryDefault(String year);
 }

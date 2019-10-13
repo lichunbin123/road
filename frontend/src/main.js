@@ -13,7 +13,7 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 //注册
 Vue.use(VueQuillEditor)
-
+window.$ = require('jquery')
 Vue.prototype.$moment = moment;
 Vue.prototype.$axios = axios;
 

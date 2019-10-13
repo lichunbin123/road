@@ -141,4 +141,20 @@ public class EventController {
         return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
     }
 
+    @RequestMapping("/application/eventanalysis/searchforevery/{year}")
+    @ResponseBody
+    public ResponseEntity<ResponseMessage> analysisForEvery(@PathVariable String year){
+        System.out.println("year==="+year);
+        ResponseMessage responseMessage = newEventService.searchForEvery(year);
+        return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
+    }
+
+    @RequestMapping("/application/eventanalysis/searchforeverydefault/{year}")
+    @ResponseBody
+    public ResponseEntity<ResponseMessage> analysisForEveryDefault(@PathVariable String year){
+        System.out.println("year==="+year);
+        ResponseMessage responseMessage = newEventService.searchForEveryDefault(year);
+        return new ResponseEntity<>(responseMessage,responseMessage.getHttpStatus());
+    }
+
 }

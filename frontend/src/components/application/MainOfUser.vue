@@ -8,7 +8,7 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>我的消息</el-dropdown-item>
           <el-dropdown-item>设置</el-dropdown-item>
-          <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+          <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <el-link v-else="username" style="margin-left:1600px; font-size: 20px;"><router-link to="/">您当前未登录,点击登录!</router-link></el-link>
@@ -82,6 +82,16 @@
           this.flag = false;
         })
       },
+      logout: function() {
+        console.log("正在退出");
+        delete localStorage.accessToken;
+        Cookies.remove('username');
+        this.$message({
+          message: '正在退出登录',
+          type: 'warning'
+        });
+        this.$router.push('/');
+      },
       handleOpen(key, keyPath) {
         console.log(key, keyPath);
       },
@@ -95,6 +105,9 @@
       analysis() {
         this.toanalysis = true;
         this.flag = false;
+      },
+      logout() {
+        console.log("正在退出");
       }
     }
   }

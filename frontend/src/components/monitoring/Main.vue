@@ -7,7 +7,7 @@
         <el-dropdown-menu slot="dropdown">
           <el-dropdown-item>我的消息</el-dropdown-item>
           <el-dropdown-item>设置</el-dropdown-item>
-          <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+          <el-dropdown-item @click.native="logout">退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <el-link v-else="username" style="margin-left:1600px; font-size:20px;"><router-link to="/">您当前未登录,点击登录!</router-link></el-link>
@@ -26,7 +26,7 @@
         <el-menu-item index="2" @click="trafficclick()">交通流量监测</el-menu-item>
         <el-menu-item index="3" @click="tovideo()">运行视频监控</el-menu-item>
         <el-menu-item index="4">移动监测管理</el-menu-item>
-        <el-menu-item index="5">运行统计分析</el-menu-item>
+        <el-menu-item index="5" @click="analysis">运行统计分析</el-menu-item>
         <el-menu-item index="6">技术监测与预警</el-menu-item>
         <el-submenu index="7">
           <template slot="title">外场设备管理</template>
@@ -39,6 +39,7 @@
     <div>
       <ChartViews v-if="cls"></ChartViews>
       <BaiduMap v-if="flag"></BaiduMap>
+      <TrafficAnalysis v-if="toanalysis"></TrafficAnalysis>
       <Video v-if="to"></Video>
       <Archives v-if="toequip"></Archives>
       <MaintenanceRecord v-if="torecord"></MaintenanceRecord>
@@ -51,6 +52,7 @@
   import axios from 'axios';
   import ChartViews from "./analysisSystem/ChartViews.vue";
   import BaiduMap from "./basicInfoManage/BaiduMap";
+  import TrafficAnalysis from "./trafficMonitor/TrafficAnalysis";
   import Video from "./videoMonitor/Video";
   import Archives from "./equipmentManage/Archives";
   import MaintenanceRecord from "./equipmentManage/MaintenanceRecord";
@@ -58,7 +60,7 @@
   import Cookies from 'js-cookie'
   export default {
     name: 'MainOfUser',
-    components: { ChartViews,BaiduMap,Video,Archives,MaintenanceRecord,StateMonitor },
+    components: { ChartViews,BaiduMap,Video,Archives,MaintenanceRecord,StateMonitor,TrafficAnalysis },
     data () {
       return {
         flag: false,
@@ -67,6 +69,7 @@
         toequip: false,
         torecord: false,
         tostate: false,
+        toanalysis: false,
         username: Cookies.get('username'),
       }
     },
@@ -79,6 +82,16 @@
         this.torecord = false;
         this.tostate = false;
         console.log("click is useful")
+      },
+      logout: function() {
+        console.log("正在退出");
+        delete localStorage.accessToken;
+        Cookies.remove('username');
+        this.$message({
+          message: '正在退出登录',
+          type: 'warning'
+        });
+        this.$router.push('/');
       },
       trafficclick: function(){
         this.cls = true;
@@ -102,6 +115,7 @@
         this.toequip = false;
         this.torecord = false;
         this.tostate = false;
+        this.toanalysis = false;
       },
       toequipmessage(){
         this.toequip = true;
@@ -110,6 +124,7 @@
         this.cls = false;
         this.torecord = false;
         this.tostate = false;
+        this.toanalysis = false;
       },
       tomaintenancerecord(){
         this.torecord = true;
@@ -118,6 +133,7 @@
         this.cls = false;
         this.tostate = false;
         this.toequip = false;
+        this.toanalysis = false;
       },
       torunstate(){
         this.tostate = true;
@@ -125,6 +141,16 @@
         this.flag = false;
         this.torecord = false;
         this.toequip = false;
+        this.to = false;
+        this.toanalysis = false;
+      },
+      analysis(){
+        this.toanalysis = true;
+        this.cls = false;
+        this.flag = false;
+        this.torecord = false;
+        this.toequip = false;
+        this.tostate = false;
         this.to = false;
       }
     }

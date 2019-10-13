@@ -36,7 +36,7 @@ public class EventServiceImpl implements EventService {
             return ResponseMessage.<InitEventMessage>builder().successStatus(true).responseData(list)
                     .httpStatus(HttpStatus.OK).build();
         }else {
-            return ResponseMessage.builder().successStatus(false).httpStatus(HttpStatus.CONFLICT).messageContent("事件信息为空").build();
+            return ResponseMessage.builder().successStatus(false).httpStatus(HttpStatus.CONFLICT).messageContent("信息为空").build();
         }
     }
 

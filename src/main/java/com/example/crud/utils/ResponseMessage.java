@@ -5,6 +5,7 @@ import com.example.crud.bean.ApplicationUser;
 import com.example.crud.bean.ClassMessageNew;
 import lombok.*;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -31,21 +32,22 @@ public class ResponseMessage<T> {
 
 
     private HttpStatus httpStatus;
-
-
     /**
      * 返回数据
      */
     private List<T> responseData;
 
     /**
-     * 返回一个用户数据
-     */
-    private ApplicationUser responseUser;
-
-    /**
      * 返回一个int个数
      */
     private int count;
+    /**
+     * 返回MultipartFile对象
+     */
+    private MultipartFile file;
+    /**
+     * 返回一个用户
+     */
+    private ApplicationUser responseUser;
 
 }

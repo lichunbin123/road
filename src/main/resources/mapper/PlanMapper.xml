@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.crud.mapper.PlanMapper">
+    <resultMap id="baseResultMap" type="com.example.crud.bean.Plan">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="date" property="date" jdbcType="VARCHAR"/>
+        <result column="content" property="content" jdbcType="BLOB"/>
+    </resultMap>
+
+    <insert id="insertPlan" parameterType="com.example.crud.bean.Plan">
+        insert into plan(
+        name, date, content
+        ) values (
+         #{name,jdbcType=VARCHAR},
+         #{date,jdbcType=VARCHAR},
+         #{content,jdbcType=BLOB}
+        )
+    </insert>
+
+    <select id="selectPlanMessage" resultMap="baseResultMap">
+        select name, date from plan;
+    </select>
+
+    <select id="downloadPlan" resultMap="baseResultMap" parameterType="String">
+        select content from plan where name=#{name};
+    </select>
+</mapper>

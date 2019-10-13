@@ -25,7 +25,6 @@ public class SparkStreaming_kafka_producer {
         String brokers = "localhost:9092";
         Properties props = new Properties();
         props.put("bootstrap.servers", "localhost:9092");
-//        props.put("metadata.broker.list","localhost:2181");
         props.put("serializer.class", "kafka.serializer.StringEncoder");
         props.put("key.serializer", "org.apache.kafka.common.serialization.StringSerializer");
         props.put("value.serializer", "org.apache.kafka.common.serialization.StringSerializer");
@@ -37,7 +36,7 @@ public class SparkStreaming_kafka_producer {
         JavaSparkContext sc = new JavaSparkContext(conf);
         //读取文件
         SQLContext sqlContext = new SQLContext(sc);
-        Dataset<Row> df = sqlContext.read().format("csv").option("header","true").load("/home/lcb/Downloads/2015_.csv");
+        Dataset<Row> df = sqlContext.read().format("csv").option("header","true").load("/home/lcb/Downloads/temp.csv");
         Dataset<Row> f=df.groupBy("GCSJ","GCZMC").agg(functions.sum(df.col("BQ1")),functions.sum(df.col("BQ2")),functions.sum(df.col("BQ3")),functions.sum(df.col("BQ4")),functions.sum(df.col("BQ5")),functions.sum(df.col("BQ6")),functions.sum(df.col("BQ7")),functions.sum(df.col("MTC")),functions.sum(df.col("TLJ"))).sort("GCSJ");
         JavaRDD<Row> rdd = f.toJavaRDD();
         List<Row> rows = rdd.collect();

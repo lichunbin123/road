@@ -67,4 +67,12 @@ public class NewEventDao {
     public List<EventAnalysis> searchForDefault(String now){
         return eventAnalysisMapper.searchfordefault(now);
     }
+
+    public List<EventAnalysis> searchForEvery(String year){
+        return eventAnalysisMapper.searchforevery(year);
+    }
+
+    public List<EventAnalysis> searchForEveryDefault(String year){
+        return eventAnalysisMapper.searchforeverydefault(year);
+    }
 }

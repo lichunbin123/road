@@ -19,6 +19,8 @@ import monitorMainOfUser from '@/components/monitoring/MainOfUser'
 import publishMain from '@/components/publish/Main'
 import NewsMessage from '@/components/publish/NewsMessage'
 import NewsContent from '@/components/publish/unchangeInfo/NewsContent'
+import disposalMain from '@/components/disposal/Main'
+import example from '@/components/disposal/riskManage/example'
 Vue.use(Router)
 
 export default new Router({
@@ -117,6 +119,16 @@ export default new Router({
       path: '/publish/content',
       name: 'NewsContent',
       component: NewsContent
+    },
+    {
+      path: '/disposal',
+      name: 'disposalMain',
+      component: disposalMain
+    },
+    {
+      path: '/example',
+      name: 'example',
+      component: example
     }
   ]
 })

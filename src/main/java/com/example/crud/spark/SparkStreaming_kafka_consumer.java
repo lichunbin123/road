@@ -88,7 +88,9 @@ public class SparkStreaming_kafka_consumer implements Serializable{
 //                trafficData.setMTC(x.getInt("MTC"));
 //                trafficData.setTLJ(x.getInt("TLJ"));
 //                trafficData.setTotal(x.getDouble("total"));
-                System.out.println("字符串x==="+x);
+                System.out.println("===============================");
+                System.out.println("======"+x+"==========");
+                System.out.println("===============================");
                 System.out.println("String.valueof(x)==="+String.valueOf(x));
                 goEasy.publish("trafficFlow", String.valueOf(x),new PublishListener(){
                     @Override

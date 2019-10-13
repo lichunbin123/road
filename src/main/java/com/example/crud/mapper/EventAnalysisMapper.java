@@ -14,4 +14,6 @@ public interface EventAnalysisMapper {
     List<EventAnalysis> searchforyear(String year);
     List<EventAnalysis> searchformonth(String month);
     List<EventAnalysis> searchfordefault(String now);
+    List<EventAnalysis> searchforevery(String year);
+    List<EventAnalysis> searchforeverydefault(String year);
 }

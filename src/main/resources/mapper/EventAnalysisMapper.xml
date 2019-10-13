@@ -34,4 +34,138 @@
         from alleventmessage;
 
     </select>
+
+    <select id="searchforevery" parameterType="String" resultMap="baseResultMap">
+        select * from
+(select  '1' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventfour   from alleventmessage union
+ select  '2' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventfour  from alleventmessage union
+ select  '3' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventfour  from alleventmessage union
+ select  '4' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventfour  from alleventmessage union
+ select  '5' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventfour  from alleventmessage union
+ select  '6' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventfour  from alleventmessage union
+ select  '7' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventfour  from alleventmessage union
+ select  '8' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventfour  from alleventmessage union
+ select  '9' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventfour  from alleventmessage union
+ select  '10' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventfour  from alleventmessage union
+ select  '11' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventfour  from alleventmessage union
+ select  '12' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventfour  from alleventmessage
+)tb1;
+
+    </select>
+
+    <select id="searchforeverydefault" parameterType="String" resultMap="baseResultMap">
+        select * from
+(select  '1' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-01','%') then 1 end) as eventfour   from alleventmessage union
+ select  '2' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-02','%') then 1 end) as eventfour  from alleventmessage union
+ select  '3' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-03','%') then 1 end) as eventfour  from alleventmessage union
+ select  '4' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-04','%') then 1 end) as eventfour  from alleventmessage union
+ select  '5' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-05','%') then 1 end) as eventfour  from alleventmessage union
+ select  '6' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-06','%') then 1 end) as eventfour  from alleventmessage union
+ select  '7' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-07','%') then 1 end) as eventfour  from alleventmessage union
+ select  '8' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-08','%') then 1 end) as eventfour  from alleventmessage union
+ select  '9' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-09','%') then 1 end) as eventfour  from alleventmessage union
+ select  '10' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-10','%') then 1 end) as eventfour  from alleventmessage union
+ select  '11' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-11','%') then 1 end) as eventfour  from alleventmessage union
+ select  '12' as id,
+        count(case when eventtype='事故' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventone,
+        count(case when eventtype='咨询' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventtwo,
+        count(case when eventtype='投诉' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventthree,
+        count(case when eventtype='反馈' and eventdate like CONCAT(#{year},'-12','%') then 1 end) as eventfour  from alleventmessage
+)tb1;
+
+    </select>
+
+
 </mapper>

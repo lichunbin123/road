@@ -3,10 +3,10 @@
     <div id="form" style="float:left;width:75%">
      <el-form ref="mainForm"  class="main-container">
       <el-row>
-        <el-button type="primary" @click="application()" round >平台应用管理</el-button>
-        <el-button type="primary" @click="monitoring()" round>路网运行监测管理</el-button>
-        <el-button type="primary" @click="disposal" round>应急管理与处置</el-button>
-        <el-button type="primary" @click="publish()" round>公路出行信息发布</el-button>
+        <el-button id="application_button" class="application_button" type="primary" @click="application()" round >平台应用管理</el-button>
+        <el-button id="monitoring_button" class="monitoring_button" type="primary" @click="monitoring()" round>路网运行监测管理</el-button>
+        <el-button id="disposal_button" class="disposal_button" type="primary" @click="disposal()" round>应急管理与处置</el-button>
+        <el-button id="publish_button" class="publish_button" type="primary" @click="publish()" round>公路出行信息发布</el-button>
       </el-row>
     </el-form>
     </div>
@@ -70,6 +70,16 @@
             this.$message("帐号没有权限")
           })
         },
+        disposal: function () {
+          const url = `http://localhost:8083/disposal`
+          return axios.post(url).then(res => {
+            console.log(res.status)
+            this.$router.push("/disposal")
+          }).catch(err => {
+            console.log(err.response)
+            this.$message("帐号没有权限")
+          })
+        },
         loadnewstitle(){
           const url = `http://localhost:8083/publish/loadnewstitle`
           return axios.post(url).then(res => {
@@ -93,6 +103,18 @@
     height: 100%;
     position: fixed;
     width: 100%
+  }
+  .application_button{
+
+  }
+  .monitoring_button{
+
+  }
+  .disposal_button{
+
+  }
+  .publish_button{
+
   }
   /*.main{*/
     /*background:url("/static/katong.jpg");*/

@@ -45,6 +45,11 @@ public class UserController {
     public void EnterPublish(){
         System.out.println("had enter publish page");
     }
+    @RequestMapping("/disposal")
+    @ResponseBody
+    public void EnterDisposal(){
+        System.out.println("had enter disposal page");
+    }
 
     @RequestMapping("/getUserMessage")
     @ResponseBody
